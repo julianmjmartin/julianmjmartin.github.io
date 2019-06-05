@@ -13,7 +13,7 @@
     var screenWidth;
     var screenHeight;
 	
-    var playerRunLeftAnimation;
+    var bmpAnimation;
     var playerIdleAnimation;
 
     var numImagesLoaded = 0;
@@ -26,7 +26,7 @@
 
         PlayerRunLeft.onload = imageLoad;
         PlayerRunLeft.onerror = imageError;
-        PlayerRunLeft.src = "playerrunleft.png";
+        PlayerRunLeft.src = "playerrunLeft.png";
 
         PlayerIdle.onload = imageLoad;
         PlayerIdle.onerror = imageError;
@@ -53,14 +53,14 @@
 
     function startGame() {
         //creates game at canvas
-        game = new createjs.Stage(canvas);
+        game = new createjs.game(canvas);
 
         //canvas width/height for calculations
         screenWidth = canvas.width;
         screenHeight = canvas.height;
 
         //creating runLeft spritesheet 
-        var spriteSheetRunLeft = new createjs.SpriteSheet({
+        var spriteSheet = new createjs.SpriteSheet({
             //image used, width + hight + registration, and slowing animation down by 4x [in that order]
             images: [PlayerRunLeft],
             frames: { width: 64, height: 67, regX: 32, regY: 32 }, 
@@ -84,18 +84,18 @@
         playerIdleAnimation.x = 16;
         playerIdleAnimation.y = 32;
 	    
-        playerRunLeftAnimation = new createjs.BitmapAnimation(spriteSheetRunLeft);
-        playerRunLeftAnimation.regX = playerRunLeftAnimation.spriteSheetRunLeft.frameWidth / 2 | 0; //set registration point to center of sprite dimensions [the point it will be positioned and rotated around]
-        playerRunLeftAnimation.regY = playerRunLeftAnimation.spriteSheetRunLeft.frameHeight / 2 | 0;
-        playerRunLeftAnimation.shadow = new createjs.Shadow("#454", 0, 5, 4);
-        playerRunLeftAnimation.name = "player1";
-        playerRunLeftAnimation.direction = 90;
-        playerRunLeftAnimation.vX = 1;
-        playerRunLeftAnimation.vY = 0;
-        playerRunLeftAnimation.x = 16;
-        playerRunLeftAnimation.y = 32;
-        playerRunLeftAnimation.currentFrame = 1; //start at frame 1
-        game.addChild(playerRunLeftAnimation);
+        bmpAnimation = new createjs.BitmapAnimation(spriteSheet);
+        bmpAnimation.regX = bmpAnimation.spriteSheet.frameWidth / 2 | 0; //set registration point to center of sprite dimensions [the point it will be positioned and rotated around]
+        bmpAnimation.regY = bmpAnimation.spriteSheet.frameHeight / 2 | 0;
+        bmpAnimation.shadow = new createjs.Shadow("#454", 0, 5, 4);
+        bmpAnimation.name = "player1";
+        bmpAnimation.direction = 90;
+        bmpAnimation.vX = 1;
+        bmpAnimation.vY = 0;
+        bmpAnimation.x = 16;
+        bmpAnimation.y = 32;
+        bmpAnimation.currentFrame = 1; //start at frame 1
+        game.addChild(bmpAnimation);
 
 		//60 FPS
         createjs.Ticker.addListener(window);
@@ -110,31 +110,31 @@
 
     function tick() {
         // Hit testing the screen width, otherwise our sprite would disappear
-        if (playerRunLeftAnimation.x >= screen_width - 16) {
+        if (bmpAnimation.x >= screen_width - 16) {
             // We've reached the right side of our screen
             // We need to runLeft left now to go back to our initial position
-            playerRunLeftAnimation.direction = -90;
-            playerRunLeftAnimation.gotoAndPlay("runLeft")
+            bmpAnimation.direction = -90;
+            bmpAnimation.gotoAndPlay("runLeft")
         }
 
-        if (playerRunLeftAnimation.x < 16) {
+        if (bmpAnimation.x < 16) {
             // We've reached the left side of our screen
             // We need to runLeft right now
-            playerRunLeftAnimation.direction = 90;
-            playerRunLeftAnimation.gotoAndStop("runLeft");
-            game.removeChild(playerRunLeftAnimation);
+            bmpAnimation.direction = 90;
+            bmpAnimation.gotoAndStop("runLeft");
+            game.removeChild(bmpAnimation);
             playerIdleAnimation.gotoAndPlay("idle");
             game.addChild(playerIdleAnimation);
         }
 
         // Moving the sprite based on the direction & the speed
-        if (playerRunLeftAnimation.direction == 90) {
-            playerRunLeftAnimation.x += playerRunLeftAnimation.vX;
-            playerRunLeftAnimation.y += playerRunLeftAnimation.vY;
+        if (bmpAnimation.direction == 90) {
+            bmpAnimation.x += bmpAnimation.vX;
+            bmpAnimation.y += bmpAnimation.vY;
         }
         else {
-            playerRunLeftAnimation.x -= playerRunLeftAnimation.vX;
-            playerRunLeftAnimation.y -= playerRunLeftAnimation.vY;
+            bmpAnimation.x -= bmpAnimation.vX;
+            bmpAnimation.y -= bmpAnimation.vY;
         }
 
         // update the game:
