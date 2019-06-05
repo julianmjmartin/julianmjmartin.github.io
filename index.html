@@ -60,7 +60,7 @@
         screenHeight = canvas.height;
 
         //creating runLeft spritesheet 
-        var spriteSheet = new createjs.SpriteSheet({
+        var spriteSheetRunLeft = new createjs.SpriteSheet({
             //image used, width + hight + registration, and slowing animation down by 4x [in that order]
             images: [PlayerRunLeft],
             frames: { width: 64, height: 67, regX: 32, regY: 32 }, 
@@ -70,7 +70,7 @@
         });
 
         //creating idle spritesheet [still a TODO]
-        var spriteSheetIdle = new createjs.SpriteSheet({
+        var spriteSheetRunLeftIdle = new createjs.SpriteSheet({
 			//image used, width + hight + registration, and slowing animation down by 4x [in that order]
             images: [PlayerIdle],
             frames: { width: 64, height: 67, regX: 32, regY: 32 }, 
@@ -79,14 +79,14 @@
             }
         });
 
-        playerIdleAni = new createjs.BitmapAnimation(spriteSheetIdle);
+        playerIdleAni = new createjs.BitmapAnimation(spriteSheetRunLeftIdle);
         playerIdleAni.name = "playerIdle1";
         playerIdleAni.x = 16;
         playerIdleAni.y = 32;
 	    
-        runLeftAni = new createjs.BitmapAnimation(spriteSheet);
-        runLeftAni.regX = runLeftAni.spriteSheet.frameWidth / 2 | 0; //set registration point to center of sprite dimensions [the point it will be positioned and rotated around]
-        runLeftAni.regY = runLeftAni.spriteSheet.frameHeight / 2 | 0;
+        runLeftAni = new createjs.BitmapAnimation(spriteSheetRunLeft);
+        runLeftAni.regX = runLeftAni.spriteSheetRunLeft.frameWidth / 2 | 0; //set registration point to center of sprite dimensions [the point it will be positioned and rotated around]
+        runLeftAni.regY = runLeftAni.spriteSheetRunLeft.frameHeight / 2 | 0;
         runLeftAni.shadow = new createjs.Shadow("#454", 0, 5, 4);
         runLeftAni.name = "player1";
         runLeftAni.direction = 90;
