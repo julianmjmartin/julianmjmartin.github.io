@@ -109,8 +109,13 @@
 	    
 	bmpGunAnimation = new createjs.BitmapAnimation(spriteSheetGun);
 	bmpGunAnimation.name = "gun1";
-        bmpAnimationIdle.x = 16;
-        bmpAnimationIdle.y = 32;
+        bmpGunAnimationIdle.x = 16;
+        bmpGunAnimationIdle.y = 32;
+	bmpGunAnimation.direction = 90;
+        bmpGunAnimation.vX = 1;
+        bmpGunAnimation.vY = 0;
+	bmpGunAnimation.regX = bmpGunAnimation.spriteSheet.frameWidth / 2 | 0;
+        bmpGunAnimation.regY = bmpGunAnimation.spriteSheet.frameHeight / 2 | 0;
 
         // create a BitmapSequence instance to display and play back the sprite sheet:
         bmpAnimation = new createjs.BitmapAnimation(spriteSheet);
