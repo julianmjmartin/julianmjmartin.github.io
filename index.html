@@ -85,8 +85,8 @@
         playerIdleAni.y = 32;
 	    
         runLeftAni = new createjs.BitmapAnimation(spriteSheetRunLeft);
-        runLeftAni.regX = runLeftAni.spriteSheetRunLeft.frameWidth / 2 | 0; //set registration point to center of sprite dimensions [the point it will be positioned and rotated around]
-        runLeftAni.regY = runLeftAni.spriteSheetRunLeft.frameHeight / 2 | 0;
+        runLeftAni.regX = runLeftAni.spriteSheet.frameWidth / 2 | 0; //set registration point to center of sprite dimensions [the point it will be positioned and rotated around]
+        runLeftAni.regY = runLeftAni.spriteSheet.frameHeight / 2 | 0;
         runLeftAni.shadow = new createjs.Shadow("#454", 0, 5, 4);
         runLeftAni.name = "player1";
         runLeftAni.direction = 90;
