@@ -110,7 +110,7 @@
 
     function tick() {
         // Hit testing the screen width, otherwise our sprite would disappear
-        if (bmpAnimation.x >= screen_width - 16) {
+        if (bmpAnimation.x >= screenWidth - 16) {
             // We've reached the right side of our screen
             // We need to runLeft left now to go back to our initial position
             bmpAnimation.direction = -90;
