@@ -13,8 +13,8 @@
     var screenWidth;
     var screenHeight;
 	
-    var bmpAnimation;
-    var playerIdleAnimation;
+    var runLeftAni;
+    var playerIdleAni;
 
     var numImagesLoaded = 0;
     var PlayerRunLeft = new Image();
@@ -79,23 +79,23 @@
             }
         });
 
-        playerIdleAnimation = new createjs.BitmapAnimation(spriteSheetIdle);
-        playerIdleAnimation.name = "playerIdle1";
-        playerIdleAnimation.x = 16;
-        playerIdleAnimation.y = 32;
+        playerIdleAni = new createjs.BitmapAnimation(spriteSheetIdle);
+        playerIdleAni.name = "playerIdle1";
+        playerIdleAni.x = 16;
+        playerIdleAni.y = 32;
 	    
-        bmpAnimation = new createjs.BitmapAnimation(spriteSheet);
-        bmpAnimation.regX = bmpAnimation.spriteSheet.frameWidth / 2 | 0; //set registration point to center of sprite dimensions [the point it will be positioned and rotated around]
-        bmpAnimation.regY = bmpAnimation.spriteSheet.frameHeight / 2 | 0;
-        bmpAnimation.shadow = new createjs.Shadow("#454", 0, 5, 4);
-        bmpAnimation.name = "player1";
-        bmpAnimation.direction = 90;
-        bmpAnimation.vX = 1;
-        bmpAnimation.vY = 0;
-        bmpAnimation.x = 16;
-        bmpAnimation.y = 32;
-        bmpAnimation.currentFrame = 1; //start at frame 1
-        game.addChild(bmpAnimation);
+        runLeftAni = new createjs.BitmapAnimation(spriteSheet);
+        runLeftAni.regX = runLeftAni.spriteSheet.frameWidth / 2 | 0; //set registration point to center of sprite dimensions [the point it will be positioned and rotated around]
+        runLeftAni.regY = runLeftAni.spriteSheet.frameHeight / 2 | 0;
+        runLeftAni.shadow = new createjs.Shadow("#454", 0, 5, 4);
+        runLeftAni.name = "player1";
+        runLeftAni.direction = 90;
+        runLeftAni.vX = 1;
+        runLeftAni.vY = 0;
+        runLeftAni.x = 16;
+        runLeftAni.y = 32;
+        runLeftAni.currentFrame = 1; //start at frame 1
+        game.addChild(runLeftAni);
 
 		//60 FPS
         createjs.Ticker.addListener(window);
@@ -110,31 +110,31 @@
 
     function tick() {
         // Hit testing the screen width, otherwise our sprite would disappear
-        if (bmpAnimation.x >= screenWidth - 16) {
+        if (runLeftAni.x >= screenWidth - 16) {
             // We've reached the right side of our screen
             // We need to runLeft left now to go back to our initial position
-            bmpAnimation.direction = -90;
-            bmpAnimation.gotoAndPlay("runLeft")
+            runLeftAni.direction = -90;
+            runLeftAni.gotoAndPlay("runLeft")
         }
 
-        if (bmpAnimation.x < 16) {
+        if (runLeftAni.x < 16) {
             // We've reached the left side of our screen
             // We need to runLeft right now
-            bmpAnimation.direction = 90;
-            bmpAnimation.gotoAndStop("runLeft");
-            game.removeChild(bmpAnimation);
-            playerIdleAnimation.gotoAndPlay("idle");
-            game.addChild(playerIdleAnimation);
+            runLeftAni.direction = 90;
+            runLeftAni.gotoAndStop("runLeft");
+            game.removeChild(runLeftAni);
+            playerIdleAni.gotoAndPlay("idle");
+            game.addChild(playerIdleAni);
         }
 
         // Moving the sprite based on the direction & the speed
-        if (bmpAnimation.direction == 90) {
-            bmpAnimation.x += bmpAnimation.vX;
-            bmpAnimation.y += bmpAnimation.vY;
+        if (runLeftAni.direction == 90) {
+            runLeftAni.x += runLeftAni.vX;
+            runLeftAni.y += runLeftAni.vY;
         }
         else {
-            bmpAnimation.x -= bmpAnimation.vX;
-            bmpAnimation.y -= bmpAnimation.vY;
+            runLeftAni.x -= runLeftAni.vX;
+            runLeftAni.y -= runLeftAni.vY;
         }
 
         // update the game:
