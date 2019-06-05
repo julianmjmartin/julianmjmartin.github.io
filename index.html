@@ -19,20 +19,20 @@
 
     var numberOfImagesLoaded = 0;
 
-    var imgMonsterARun = new Image();
-    var imgMonsterAIdle = new Image();
+    var imgPlayerRun = new Image();
+    var imgPlayerIdle = new Image();
 
     function init() {
         //find canvas and load images, wait for last image to load
         canvas = document.getElementById("testCanvas");
 
-        imgMonsterARun.onload = handleImageLoad;
-        imgMonsterARun.onerror = handleImageError;
-        imgMonsterARun.src = "playerrun.png";
+        imgPlayerRun.onload = handleImageLoad;
+        imgPlayerRun.onerror = handleImageError;
+        imgPlayerRun.src = "playerrun.png";
 
-        imgMonsterAIdle.onload = handleImageLoad;
-        imgMonsterAIdle.onerror = handleImageError;
-        imgMonsterAIdle.src = "playerrun.png";
+        imgPlayerIdle.onload = handleImageLoad;
+        imgPlayerIdle.onerror = handleImageError;
+        imgPlayerIdle.src = "playeridle.png";
     }
 
     function handleImageLoad(e) {
@@ -64,7 +64,7 @@
         // create spritesheet and assign the associated data.
         var spriteSheet = new createjs.SpriteSheet({
             //image to use
-            images: [imgMonsterARun],
+            images: [imgPlayerRun],
             //width, height & registration point of each sprite
             frames: { width: 64, height: 67, regX: 32, regY: 32 }, 
             // To slow down the animation loop of the sprite, we set the frequency to 4 to slow down by a 4x factor
@@ -80,16 +80,16 @@
 
         // Idle sequence of the monster
         var spriteSheetIdle = new createjs.SpriteSheet({
-            images: [imgMonsterAIdle],
+            images: [imgPlayerIdle],
             frames: { width: 64, height: 67, regX: 32, regY: 32 }, 
             animations: {
-                idle: [0, 5, "idle", 4]
+                idle: [0, 11, "idle", 4]
             }
         });
 
         bmpAnimationIdle = new createjs.BitmapAnimation(spriteSheetIdle);
 
-        bmpAnimationIdle.name = "monsteridle1";
+        bmpAnimationIdle.name = "playerIdle1";
         bmpAnimationIdle.x = 16;
         bmpAnimationIdle.y = 32;
 
@@ -110,7 +110,7 @@
         // of animated rats if you disabled the shadow.
         bmpAnimation.shadow = new createjs.Shadow("#454", 0, 5, 4);
 
-        bmpAnimation.name = "monster1";
+        bmpAnimation.name = "player1";
         bmpAnimation.direction = 90;
         bmpAnimation.vX = 1;
         bmpAnimation.vY = 0;
