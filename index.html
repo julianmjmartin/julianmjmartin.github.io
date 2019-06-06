@@ -19,6 +19,19 @@
     var numImagesLoaded = 0;
     var PlayerRunLeft = new Image();
     var PlayerIdle = new Image();
+	
+    var KEYCODE_W = 87;
+    var KEYCODE_A = 65;
+    var KEYCODE_D = 68;
+	
+    var lfHeld;				
+    var rtHeld;		
+    var fwdHeld;
+	
+    var TURN_FACTOR = 7;
+
+    document.onkeydown = handleKeyDown;
+    document.onkeyup = handleKeyUp;
 
     function init() {
         //load canvas + images
@@ -107,9 +120,68 @@
     function imageError(e) {
         console.log("Error Loading Image : " + e.target.src);
     }
-
+    
+    function handleKeyDown(e) {
+	//cross browser issues exist
+	if (!e) {
+		var e = window.event;
+	}
+	switch (e.keyCode) {
+		//case KEYCODE_SPACE:
+			//shootHeld = true;
+			//return false;
+		case KEYCODE_A:
+		//case KEYCODE_LEFT:
+			lfHeld = true;
+			return false;
+		case KEYCODE_D:
+		//case KEYCODE_RIGHT:
+			rtHeld = true;
+			return false;
+		case KEYCODE_W:
+		//case KEYCODE_UP:
+			fwdHeld = true;
+			return false;
+		//case KEYCODE_ENTER:
+			/*if (canvas.onclick == handleClick) {
+				handleClick();
+			}
+			return false;*/
+	}
+    }
+	
+    function handleKeyUp(e) {
+	//cross browser issues exist
+	if (!e) {
+		var e = window.event;
+	}
+	switch (e.keyCode) {
+		//case KEYCODE_SPACE:
+			//shootHeld = false;
+			//break;
+		case KEYCODE_A:
+		//case KEYCODE_LEFT:
+			lfHeld = false;
+			break;
+		case KEYCODE_D:
+		//case KEYCODE_RIGHT:
+			rtHeld = false;
+			break;
+		case KEYCODE_W:
+		//case KEYCODE_UP:
+			fwdHeld = false;
+			break;
+	}
+}
+	
     function tick() {
         // Hit testing the screen width, otherwise our sprite would disappear
+	
+	if (lfHeld || rtHeld) {
+	    runLeftAni.direction = -90;
+            runLeftAni.gotoAndPlay("runLeft")
+	}
+	
         if (runLeftAni.x >= screenWidth - 16) {
             // We've reached the right side of our screen
             // We need to runLeft left now to go back to our initial position
@@ -119,7 +191,7 @@
 
         if (runLeftAni.x < 16) {
             // We've reached the left side of our screen
-            // We need to runLeft right now
+            // We need to run right now
             runLeftAni.direction = 90;
             runLeftAni.gotoAndStop("runLeft");
             game.removeChild(runLeftAni);
