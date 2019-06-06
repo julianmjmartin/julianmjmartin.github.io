@@ -102,7 +102,7 @@
         runLeftAni.regY = runLeftAni.spriteSheet.frameHeight / 2 | 0;
         runLeftAni.shadow = new createjs.Shadow("#454", 0, 5, 4);
         runLeftAni.name = "player1";
-        runLeftAni.direction = 90;
+        runLeftAni.direction = 0;
         runLeftAni.vX = 1;
         runLeftAni.vY = 0;
         runLeftAni.x = 16;
@@ -183,8 +183,13 @@
     function tick() {
         // Hit testing the screen width, otherwise our sprite would disappear
 	
-	if (lfHeld || rtHeld) {
+	if (lfHeld) {
 	    runLeftAni.direction = -90;
+            runLeftAni.gotoAndPlay("runLeft")
+	    console.log("working")
+	}
+	else if (rtHeld) {
+	    runLeftAni.direction = 90;
             runLeftAni.gotoAndPlay("runLeft")
 	    console.log("working")
 	}
