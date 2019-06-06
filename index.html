@@ -193,6 +193,14 @@
             runLeftAni.gotoAndPlay("runLeft")
 	    console.log("working")
 	}
+	else if (!lfHeld && !rtHeld) {
+	    runLeftAni.direction = 90;
+            runLeftAni.gotoAndStop("runLeft");
+            game.removeChild(runLeftAni);
+            playerIdleAni.gotoAndPlay("idle");
+            game.addChild(playerIdleAni);
+	    console.log("standing")
+	}
 	
       /*  if (runLeftAni.x >= screenWidth - 16) {
             // We've reached the right side of our screen
