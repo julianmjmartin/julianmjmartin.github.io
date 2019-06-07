@@ -24,9 +24,9 @@
     var KEYCODE_A = 65;
     var KEYCODE_D = 68;
 	
-    var lfHeld;				
-    var rtHeld;		
-    var fwdHeld;
+    var aHeld;				
+    var dHeld;		
+    var wHeld;
 	
     var TURN_FACTOR = 7;
 
@@ -132,15 +132,15 @@
 			//return false;
 		case KEYCODE_A:
 		//case KEYCODE_LEFT:
-			lfHeld = true;
+			aHeld = true;
 			return false;
 		case KEYCODE_D:
 		//case KEYCODE_RIGHT:
-			rtHeld = true;
+			dHeld = true;
 			return false;
 		case KEYCODE_W:
 		//case KEYCODE_UP:
-			fwdHeld = true;
+			wHeld = true;
 			return false;
 		//case KEYCODE_ENTER:
 			/*if (canvas.onclick == handleClick) {
@@ -161,15 +161,15 @@
 			//break;
 		case KEYCODE_A:
 		//case KEYCODE_LEFT:
-			lfHeld = false;
+			aHeld = false;
 			break;
 		case KEYCODE_D:
 		//case KEYCODE_RIGHT:
-			rtHeld = false;
+			dHeld = false;
 			break;
 		case KEYCODE_W:
 		//case KEYCODE_UP:
-			fwdHeld = false;
+			wHeld = false;
 			break;
 	}
 }
@@ -177,12 +177,12 @@
     function tick() {
         // Hit testing the screen width, otherwise our sprite would disappear
 	
-	if (lfHeld) {
+	if (aHeld) {
 	    runLeftAni.direction = -90;
             runLeftAni.gotoAndPlay("runLeft")
 	    console.log("run left")
 	}
-	else if (rtHeld) {
+	else if (dHeld) {
 	    runLeftAni.direction = 90;
             runLeftAni.gotoAndPlay("runLeft")
 	    console.log("run right")
@@ -191,9 +191,12 @@
 	    runLeftAni.direction = 90;
             runLeftAni.gotoAndStop("runLeft");
             game.removeChild(runLeftAni);
-            playerIdleAni.gotoAndPlay("idle");
-            game.addChild(playerIdleAni);
+            //playerIdleAni.gotoAndPlay("idle");
+            //game.addChild(playerIdleAni);
 	    console.log("standing")
+	}
+	if (wHeld) {
+	    console.log("jump")
 	}
 	
       /*  if (runLeftAni.x >= screenWidth - 16) {
