@@ -132,17 +132,14 @@
 			//return false;
 		case KEYCODE_A:
 		//case KEYCODE_LEFT:
-			console.log("working")
 			lfHeld = true;
 			return false;
 		case KEYCODE_D:
 		//case KEYCODE_RIGHT:
-			console.log("working")
 			rtHeld = true;
 			return false;
 		case KEYCODE_W:
 		//case KEYCODE_UP:
-			console.log("working")
 			fwdHeld = true;
 			return false;
 		//case KEYCODE_ENTER:
@@ -164,17 +161,14 @@
 			//break;
 		case KEYCODE_A:
 		//case KEYCODE_LEFT:
-			console.log("up")
 			lfHeld = false;
 			break;
 		case KEYCODE_D:
 		//case KEYCODE_RIGHT:
-			console.log("up")
 			rtHeld = false;
 			break;
 		case KEYCODE_W:
 		//case KEYCODE_UP:
-			console.log("up")
 			fwdHeld = false;
 			break;
 	}
@@ -186,12 +180,12 @@
 	if (lfHeld) {
 	    runLeftAni.direction = -90;
             runLeftAni.gotoAndPlay("runLeft")
-	    console.log("working")
+	    console.log("run left")
 	}
 	else if (rtHeld) {
 	    runLeftAni.direction = 90;
             runLeftAni.gotoAndPlay("runLeft")
-	    console.log("working")
+	    console.log("run right")
 	}
 	else if (!lfHeld && !rtHeld) {
 	    runLeftAni.direction = 90;
