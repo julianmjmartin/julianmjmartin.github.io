@@ -12,9 +12,9 @@
     function init() {
 	var data = {
         	images: ["oof.png"],
-        	frames: {width:100, height:100, count:4, regX: 50, regY:50, spacing:0, margin:0},
+        	frames: {width:100, height:100, count:4, regX: 50, regY:50},
         	animations: {
-           		run: {frames: [1,2,3,3,2,1]},
+           		run: [0, 3, "run"]
         	}
     	};
     	var spriteSheet = new createjs.SpriteSheet(data);
