@@ -15,7 +15,7 @@ var requestAnimFrame = (function(){
 var canvas = document.createElement("canvas");
 var ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
-canvas.height = window.innerHeight - 50;
+canvas.height = window.innerHeight - 250;
 document.body.appendChild(canvas);
 
 // The main game loop
