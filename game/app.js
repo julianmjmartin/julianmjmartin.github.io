@@ -78,7 +78,9 @@ function update(dt) {
 
     handleInput(dt);
     updateEntities(dt);
-
+    
+    player.pos[1] += (playerSpeed * dt)/2;
+    
     // It gets harder over time by adding enemies using this
     // equation: 1-.993^gameTime
     if(Math.random() < 1 - Math.pow(.993, gameTime)) {
