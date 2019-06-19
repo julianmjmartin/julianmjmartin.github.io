@@ -64,6 +64,8 @@ var gameTime = 0;
 var isGameOver;
 var terrainPattern;
 
+var isJumping;
+
 var score = 0;
 var scoreEl = document.getElementById('score');
 
@@ -77,9 +79,11 @@ function update(dt) {
     gameTime += dt;
 
     handleInput(dt);
-    updateEntities(dt);
+    updateEntities(dt); 
+    gravityCheck(dt);
     
-    player.pos[1] += (playerSpeed * dt)/2;
+    
+    
     
     // It gets harder over time by adding enemies using this
     // equation: 1-.993^gameTime
@@ -97,9 +101,26 @@ function update(dt) {
     scoreEl.innerHTML = score;
 };
 
+function gravityCheck(dt) {
+    if(!isJumping || isJumping == null) {
+        player.pos[1] += (playerSpeed * dt)*2;
+    }
+}
+
 function handleInput(dt) {
     if(input.isDown('DOWN') || input.isDown('s')) {
         player.pos[1] += playerSpeed * dt;
+    }
+    
+    if(input.isDown('UP') || input.isDown('s') && player.pos[1] > 700 ) {
+        while(player.pos[1] > 400) {
+            isJumping = true; 
+            player.pos[1] -= playerSpeed * dt;
+        }
+    }
+    
+    if(player.pos[1] <= 400){
+        isJumping = false;
     }
 
     if(input.isDown('UP') || input.isDown('w')) {
