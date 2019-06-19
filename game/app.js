@@ -82,7 +82,7 @@ function update(dt) {
     updateEntities(dt); 
     gravityCheck(dt);
     console.log(player.pos[1]);
-    //console.log(isJumping);
+    console.log(isJumping);
     
     // It gets harder over time by adding enemies using this
     // equation: 1-.993^gameTime
