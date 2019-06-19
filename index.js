@@ -232,6 +232,7 @@ function checkKey(e) {
     }
     if (e.keyCode == '83' || e.keyCode == '16' || e.keyCode == '40') {
         myGamePiece.height = 60;
+	myGamePiece.image.src = "https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwiZ_vyr5PTiAhVqk-AKHeJ4BfQQjRx6BAgBEAU&url=https%3A%2F%2Fwww.smithsonianmag.com%2Fscience-nature%2Fbuilding-a-better-banana-70543194%2F&psig=AOvVaw2jnRnkkjhlG0MKJ12Ed19o&ust=1561007517780560";
 	
     }
 }
