@@ -81,7 +81,7 @@ function update(dt) {
     handleInput(dt);
     updateEntities(dt); 
     gravityCheck(dt);
-    
+    console.log(isJumping);
     
     
     
