@@ -32,7 +32,7 @@ function main() {
 };
 
 function init() {
-    terrainPattern = ctx.createPattern(resources.get('img/terrain.png'), 'repeat');
+    terrainPattern = ctx.createPattern(resources.get('terrain.png'), 'repeat');
 
     document.getElementById('play-again').addEventListener('click', function() {
         reset();
@@ -52,7 +52,7 @@ resources.onReady(init);
 // Game state
 var player = {
     pos: [0, 0],
-    sprite: new Sprite('img/sprites.png', [0, 0], [39, 39], 16, [0, 1])
+    sprite: new Sprite('sprites.png', [0, 0], [39, 39], 16, [0, 1])
 };
 
 var bullets = [];
@@ -216,7 +216,7 @@ function checkCollisions() {
                 // Add an explosion
                 explosions.push({
                     pos: pos,
-                    sprite: new Sprite('img/sprites.png',
+                    sprite: new Sprite('sprites.png',
                                        [0, 117],
                                        [39, 39],
                                        16,
