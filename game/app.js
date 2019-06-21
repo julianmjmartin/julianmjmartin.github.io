@@ -103,6 +103,8 @@ function gravityCheck() {
         player.pos[1] += (playerSpeed * 0.016)*2;
     }
     else {
+        console.log(player.pos[1]);
+        console.log(isJumping);
         player.pos[1] += -((playerSpeed * 0.016)*2);
     }
 }
@@ -113,9 +115,6 @@ function handleInput(dt) {
     }
     
     if(input.isDown('UP') || input.isDown('w')) { 
-        console.log(player.pos[1]);
-        console.log(isJumping);
-        console.log(dt);
         if(player.pos[1] >= 690) {
             if(player.pos[1] > 400) {
                 isJumping = true; 
