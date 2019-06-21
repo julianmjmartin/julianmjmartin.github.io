@@ -80,10 +80,8 @@ function update(dt) {
 
     handleInput(dt);
     updateEntities(dt); 
-    gravityCheck(dt);
-    //console.log(player.pos[1]);
-    //console.log(isJumping);
-    
+    gravityCheck();
+
     // It gets harder over time by adding enemies using this
     // equation: 1-.993^gameTime
     if(Math.random() < 1 - Math.pow(.993, gameTime)) {
@@ -100,12 +98,12 @@ function update(dt) {
     scoreEl.innerHTML = score;
 };
 
-function gravityCheck(dt) {
+function gravityCheck() {
     if(!isJumping || isJumping == null) {
-        player.pos[1] += (playerSpeed * dt)*2;
+        player.pos[1] += (playerSpeed * 0.016)*2;
     }
     else {
-        player.pos[1] += -((playerSpeed * dt)*2);
+        player.pos[1] += -((playerSpeed * 0.016)*2);
     }
 }
 
