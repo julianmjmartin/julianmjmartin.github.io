@@ -100,6 +100,8 @@ function update(dt) {
 
 function gravityCheck() {
     if(!isJumping || isJumping == null) {
+        console.log(player.pos[1]);
+        console.log(isJumping);
         player.pos[1] += (playerSpeed * 0.016)*2;
     }
     else {
