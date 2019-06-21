@@ -119,12 +119,10 @@ function handleInput(dt) {
     
     if(input.isDown('UP') || input.isDown('w')) { 
         if(player.pos[1] >= 662) {
-            if(player.pos[1] > 400) {
-                isJumping = true; 
-
-                //player.pos[1] -= (playerSpeed * dt)/100;
-                //player.pos[1] += -((playerSpeed * dt)*2);
-            }
+            isJumping = true; 
+        }
+        else if(player.pos[1] <= 400 && isJumping == true) {
+            isJumping = false; 
         }
     }
     
