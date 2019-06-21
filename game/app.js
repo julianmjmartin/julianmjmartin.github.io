@@ -46,14 +46,14 @@ function init() {
 resources.load([
     'sprites.png',
     'terrain.png',
-    'playSprites.png'
+    'playerSprites.png'
 ]);
 resources.onReady(init);
 
 // Game state
 var player = {
     pos: [0, 0],
-    sprite: new Sprite('playSprites.png', [0, 0], [64, 67], 16, [0, 5])
+    sprite: new Sprite('playerSprites.png', [0, 0], [60, 64], 4, [0, 5])
 };
 
 var bullets = [];
