@@ -121,7 +121,7 @@ function handleInput(dt) {
             if(player.pos[1] > 400) {
                 isJumping = true; 
                 player.push({
-                   pos: pos,
+                   pos: player.pos[1],player.pos[0]
                    sprite: new Sprite('sprites.png',
                                       [0, 117],
                                       [39, 39],
