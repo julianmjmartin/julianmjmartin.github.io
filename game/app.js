@@ -117,9 +117,8 @@ function handleInput(dt) {
     if(input.isDown('UP') || input.isDown('w')) { 
         console.log(player.pos[1]);
         console.log(isJumping);
+        console.log(dt);
         if(player.pos[1] >= 690) {
-            console.log(player.pos[1]);
-            console.log(isJumping);
             if(player.pos[1] > 400) {
                 isJumping = true; 
                 //player.pos[1] -= (playerSpeed * dt)/100;
