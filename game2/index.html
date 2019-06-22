@@ -36,32 +36,40 @@
 						if(gachis >= ((GBB.level + 1) / 10 * 60) && GBB.level == 0) {
 							GBB.level += 1;
 							GBB.active = true;
+							gachis -= ((GBB.level + 1) / 10 * 60);
 						}else if (gachis >= ((GBB.level + 1) / 10 * 60) && GBB.level < 10) {
 							GBB.level += 1;
+							gachis -= ((GBB.level + 1) / 10 * 60);
 						}
 						break;
 					case "GG":
 						if(gachis >= ((GGB.level + 1) / 10 * 120) && GGB.level == 0) {
 							GGB.level += 1;
 							GGB.active = true;
+							gachis -= ((GGB.level + 1) / 10 * 120);
 						}else if (gachis >= ((GGB.level + 1) / 10 * 120) && GGB.level < 10) {
 							GGB.level += 1;
+							gachis -= ((GGB.level + 1) / 10 * 120);
 						}
 						break;
 					case "GP":
 						if(gachis >= ((GPB.level + 1) / 10 * 240) && GPB.level == 0) {
 							GPB.level += 1;
 							GPB.active = true;
+							gachis -= ((GPB.level + 1) / 10 * 240);
 						}else if (gachis >= ((GPB.level + 1) / 10 * 240) && GPB.level < 10) {
 							GPB.level += 1;
+							gachis -= ((GPB.level + 1) / 10 * 240);
 						}
 						break;
 					case "GH":
 						if(gachis >= ((GHB.level + 1) / 10 * 480) && GHB.level == 0) {
 							GHB.level += 1;
 							GHB.active = true;
+							gachis -= ((GHB.level + 1) / 10 * 480);
 						}else if (gachis >= ((GHB.level + 1) / 10 * 480) && GHB.level < 10) {
 							GHB.level += 1;
+							gachis -= ((GHB.level + 1) / 10 * 480);
 						}
 						break;
 					default:
