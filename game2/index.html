@@ -46,13 +46,13 @@
 			function buyLvl(id) {
 				switch(id) {
 					case "GB":
-						if(gachis >= /*((GBB.level + 1)* 60)*/ gachiBASS.price && GBB.level == 0) {
-							GBB.level += 1;
-							GBB.active = true;
-							gachis -= ((GBB.level + 1)* 60 / 2);
-						}else if (gachis >= ((GBB.level + 1)* 60) && GBB.level < 10) {
-							GBB.level += 1;
-							gachis -= ((GBB.level + 1)* 60 / 2);
+						if(gachis >= /*((GBB.level + 1)* 60)*/ gachiBASS.price && gachiBASS.level == 0) {
+							gachiBASS.level += 1;
+							gachiBASS.active = true;
+							gachis -= ((gachiBASS.level + 1)* 60 / 2);
+						}else if (gachis >= ((gachiBASS.level + 1)* 60) && gachiBASS.level < 10) {
+							gachiBASS.level += 1;
+							gachis -= ((gachiBASS.level + 1)* 60 / 2);
 						}
 						break;
 					case "GG":
@@ -91,9 +91,9 @@
 				}	
 			}
 			setInterval(function(){
-				if(GBB.active == true) {
-					gachis += GBB.level+((GBB.level+1)*1.2)
-					console.log("GBB");
+				if(gachiBASS.active == true) {
+					gachis += gachiBASS.level+((gachiBASS.level+1)*1.2)
+					console.log("gachiBASS");
 				}
 				if(GGB.active == true) {
 					gachis += GGB.level+((GGB.level+1)*1.4) 
@@ -111,8 +111,8 @@
 			setInterval(function(){
             	var gachivs = gachis.toFixed(1);
 				document.getElementById("score").innerHTML = "Your gachi value is: " + gachivs;
-				if(GBB.level < 10) {
-					document.getElementById("GB").innerHTML = "Buy gachiBASS level " + (GBB.level+1) + " for " + gachiBASS.price + " gachis";				
+				if(gachiBASS.level < 10) {
+					document.getElementById("GB").innerHTML = "Buy gachiBASS level " + (gachiBASS.level+1) + " for " + gachiBASS.price + " gachis";				
 				}else {
 					document.getElementById("GB").innerHTML = "Your gachiBASS level is max";				
 				}
