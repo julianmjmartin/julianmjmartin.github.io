@@ -1,27 +1,32 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>gachiBASS Game</title>
-</head>
-<body>
-<canvas id="e" width="600" height="686"></canvas>
-<p id="score">0</p>
-<script>
-var canvas = document.getElementById("e");
-var context = canvas.getContext("2d");
-var face = new Image();
-var gachis = 0;
-face.src = "https://discordemoji.com/assets/emoji/gachiBASS.png";
-face.onload = function() {
-	context.drawImage(face, 0, 0);
-};
-canvas.addEventListener("click", clicked, false);
-function clicked(e) {
-	gachis += 1;
-}
-setInterval(function(){
-	document.getElementById("score").innerHTML = gachis;
-}, 100);
-</script>
-</body>
+	<head>
+		<title>gachiBASS Game</title>
+	</head>
+	<body>
+		<canvas id="e" width="600" height="686"></canvas>
+		<p id="score">0</p>
+		<script>
+			var canvas = document.getElementById("e");
+			var context = canvas.getContext("2d");
+			var billy = new Image();
+			var gachis = 0;
+			var clickLevel = 1;
+			billy.src = "https://discordemoji.com/assets/emoji/gachiBASS.png";
+			billy.onload = function() {
+				context.drawImage(billy, 0, 0);
+			};
+			if (gachis == 100) {
+				clickLevel *= 2;
+				gachis = 0;
+			}
+			canvas.addEventListener("click", clicked, false);
+			function clicked(e) {
+				gachis += 1 * clickLevel;
+			}
+			setInterval(function(){
+				document.getElementById("score").innerHTML = gachis;
+			}, 100);
+		</script>
+	</body>
 </html>
