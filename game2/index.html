@@ -14,6 +14,7 @@
       };
 
       function update(dt) {
+        console.log(gachis + "" + gLevel);
         switch(gLevel) {
           case 0:
             gachis += 0.1;
@@ -25,7 +26,7 @@
             gachis += 2;
             break;
         }
-        gachis.toFixed(1);
+        gachis.toFixed(2);
         document.getElementById("gScore").innerHTML = gachis;
       }
       function levelOne() {
