@@ -6,19 +6,26 @@
 	<body>
 		<canvas id="e" width="600" height="686"></canvas>
 		<p id="score">0</p>
+		<p id="prestigeScore">0</p>
 		<script>
 			var canvas = document.getElementById("e");
 			var context = canvas.getContext("2d");
 			var billy = new Image();
 			var gachis = 0;
+			var prestigeGachis = 0;
 			var clickLevel = 1;
 			billy.src = "https://discordemoji.com/assets/emoji/gachiBASS.png";
 			billy.onload = function() {
 				context.drawImage(billy, 0, 0);
 			};
 			function maxout() {
-				if (gachis >= 100) {
+				if (gachis == 100) {
 					clickLevel *= 2;
+					gachis = 0;
+				}
+				else if (gachis > 100) {
+					prestigeGachis += gachis - 100;
+					clickLevel *=2;
 					gachis = 0;
 				}
 			}
@@ -28,7 +35,8 @@
 				maxout();
 			}
 			setInterval(function(){
-				document.getElementById("score").innerHTML = gachis;
+				document.getElementById("score").innerHTML = "Your gachis are: " + gachis;
+				document.getElementById("prestigeScore").innerHTML = "Your prestige gachis are: " + prestigeGachis;
 			}, 100);
 		</script>
 	</body>
