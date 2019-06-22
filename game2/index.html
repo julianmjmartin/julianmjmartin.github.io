@@ -17,10 +17,10 @@
 			
 			var gachis = 0;
 			
-			var GBB = {level:0, active:false, gain:function(){return this.level+((this.level+1)/20)}, price:function(){return 60*((1+this.level)/10)}}; 
-			var GGB = {level:0, active:false, gain:function(){return this.level+((this.level+1)/18)}, price:function(){return 120*((1+this.level)/10)}};
-			var GPB = {level:0, active:false, gain:function(){return this.level+((this.level+1)/16)}, price:function(){return 240*((1+this.level)/10)}};
-			var GHB = {level:0, active:false, gain:function(){return this.level+((this.level+1)/14)}, price:function(){return 480*((1+this.level)/10)}};
+			var GBB = {level:0, active:false}; 
+			var GGB = {level:0, active:false};
+			var GPB = {level:0, active:false};
+			var GHB = {level:0, active:false};
 			
 			billy.src = "https://discordemoji.com/assets/emoji/gachiBASS.png";
 			billy.onload = function() {
@@ -33,34 +33,34 @@
 			function buyLvl(id) {
 				switch(id) {
 					case "GB":
-						if(gachis >= GBB.price && GBB.level == 0) {
+						if(gachis >= ((GBB.level + 1) / 10 * 60) && GBB.level == 0) {
 							GBB.level += 1;
 							GBB.active = true;
-						}else if (gachis >= GBB.price && GBB.level < 10) {
+						}else if (gachis >= ((GBB.level + 1) / 10 * 60) && GBB.level < 10) {
 							GBB.level += 1;
 						}
 						break;
 					case "GG":
-						if(gachis >= GGB.price && GGB.level == 0) {
+						if(gachis >= ((GGB.level + 1) / 10 * 120) && GGB.level == 0) {
 							GGB.level += 1;
 							GGB.active = true;
-						}else if (gachis >= GGB.price && GGB.level < 10) {
+						}else if (gachis >= ((GGB.level + 1) / 10 * 120) && GGB.level < 10) {
 							GGB.level += 1;
 						}
 						break;
 					case "GP":
-						if(gachis >= GPB.price && GPB.level == 0) {
+						if(gachis >= ((GPB.level + 1) / 10 * 240) && GPB.level == 0) {
 							GPB.level += 1;
 							GPB.active = true;
-						}else if (gachis >= GPB.price && GPB.level < 10) {
+						}else if (gachis >= ((GPB.level + 1) / 10 * 240) && GPB.level < 10) {
 							GPB.level += 1;
 						}
 						break;
 					case "GH":
-						if(gachis >= GHB.price && GHB.level == 0) {
+						if(gachis >= ((GHB.level + 1) / 10 * 480) && GHB.level == 0) {
 							GHB.level += 1;
 							GHB.active = true;
-						}else if (gachis >= GHB.price && GHB.level < 10) {
+						}else if (gachis >= ((GHB.level + 1) / 10 * 480) && GHB.level < 10) {
 							GHB.level += 1;
 						}
 						break;
@@ -71,37 +71,38 @@
 			}
 			setInterval(function(){
 				if(GBB.active == true) {
-					gachis += GBB.gain; 
+					gachis += GBB.level+((GBB.level+1)/20)
 				}
 				if(GGB.active == true) {
-					gachis += GGB.gain; 
+					gachis += GGB.level+((GGB.level+1)/18) 
 				}
 				if(GPB.active == true) {
-					gachis += GPB.gain; 
+					gachis += GPB.level+((GPB.level+1)/16)  
 				}
 				if(GHB.active == true) {
-					gachis += GHB.gain; 
+					gachis += GHB.level+((GHB.level+1)/14)  
 				}
 			}, 1000);
 			setInterval(function(){
-				document.getElementById("score").innerHTML = "Your gachi value is: " + gachis;
+            	var gachivs = gachis.toFixed(1);
+				document.getElementById("score").innerHTML = "Your gachi value is: " + gachivs;
 				if(GBB.level < 10) {
-					document.getElementById("GB").innerHTML = "Buy gachiBASS level " + (GBB.level+1) + " for " + GBB.price + " gachis";				
+					document.getElementById("GB").innerHTML = "Buy gachiBASS level " + (GBB.level+1) + " for " + ((GBB.level + 1) * 60) + " gachis";				
 				}else {
 					document.getElementById("GB").innerHTML = "Your gachiBASS level is max";				
 				}
 				if(GGB.level < 10) {
-					document.getElementById("GG").innerHTML = "Buy gachiGASM level " + (GGB.level+1) + " for " + GGB.price + " gachis";				
+					document.getElementById("GG").innerHTML = "Buy gachiGASM level " + (GGB.level+1) + " for " + ((GGB.level + 1) * 120) + " gachis";				
 				}else {
 					document.getElementById("GG").innerHTML = "Your gachiGASM level is max";				
 				}
 				if(GPB.level < 10) {
-					document.getElementById("GP").innerHTML = "Buy gachiPls level " + (GPB.level+1) + " for " + GPB.price + " gachis";				
+					document.getElementById("GP").innerHTML = "Buy gachiPls level " + (GPB.level+1) + " for " + ((GPB.level + 1) * 240) + " gachis";				
 				}else {
 					document.getElementById("GP").innerHTML = "Your gachiPls level is max";				
 				}
 				if(GHB.level < 10) {
-					document.getElementById("GH").innerHTML = "Buy gachiHYPER level " + (GHB.level+1) + " for " + GHB.price + " gachis";				
+					document.getElementById("GH").innerHTML = "Buy gachiHYPER level " + (GHB.level+1) + " for " + ((GHB.level + 1) * 480) + " gachis";				
 				}else {
 					document.getElementById("GH").innerHTML = "Your gachiHYPER level is max";				
 				}
