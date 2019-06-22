@@ -1,49 +1,27 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>gachibass</title>
-    <script>
-      var gachis = 0;
-      var gLevel = 0;
-      var lastTime;
-      function main() {
-        var now = Date.now();
-        var dt = (now - lastTime) / 1000.0;
-        update(dt);
-        lastTime = now;
-      }
-
-      function update(dt) {
-        console.log(gachis + "" + gLevel);
-        switch(gLevel) {
-          case 0:
-            gachis += 0.1;
-            break;
-          case 1:
-            gachis += 1;
-            break;
-          case 2:
-            gachis += 2;
-            break;
-        }
-        gachis.toFixed(2);
-        document.getElementById("gScore").innerHTML = gachis;
-      }
-      function levelOne() {
-        if(gachis >= 10) {
-          gLevel = 1;
-        }
-      }
-      function levelTwo() {
-        if(gachis >= 100) {
-          gLevel = 2;
-        }
-      }
-    </script>
-  </head>
-  <body>
-    <p id="gScore">0</p>
-    <button onclick="levelOne()">Buy Level 1 (10g)</button>
-    <button onclick="levelTwo()">Buy Level 2 (100g)</button>
-  </body>
+<head>
+<title>gachiBASS Game</title>
+</head>
+<body>
+<canvas id="e" width="600" height="686"></canvas>
+<p id="score">0</p>
+<script>
+var canvas = document.getElementById("e");
+var context = canvas.getContext("2d");
+var face = new Image();
+var gachis = 0;
+face.src = "https://discordemoji.com/assets/emoji/gachiBASS.png";
+face.onload = function() {
+	context.drawImage(face, 0, 0);
+};
+canvas.addEventListener("click", clicked, false);
+function clicked(e) {
+	gachis += 1;
+}
+setInterval(function(){
+	document.getElementById("score").innerHTML = gachis;
+}, 100);
+</script>
+</body>
 </html>
