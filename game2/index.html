@@ -5,12 +5,15 @@
     <script>
       var gachis = 0;
       var gLevel = 0;
-      function init() {
-        while(gachis <= 1000) {
-          setInterval(updateScore(), 1000);
-        }
-      }  
-      function updateScore() {
+      var lastTime;
+      function main() {
+        var now = Date.now();
+        var dt = (now - lastTime) / 1000.0;
+        update(dt);
+        lastTime = now;
+      };
+
+      function update(dt) {
         switch(gLevel) {
           case 0:
             gachis += 0.1;
@@ -38,7 +41,7 @@
       init();
     </script>
   </head>
-  <body onload="init()">
+  <body>
     <p id="gScore">0</p>
     <button onclick="levelOne()">Buy Level 1 (10g)</button>
     <button onclick="levelTwo()">Buy Level 2 (100g)</button>
