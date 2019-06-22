@@ -6,37 +6,55 @@
 	<body>
 		<canvas id="e" width="600" height="686"></canvas>
 		<p id="score">0</p>
-		<p id="prestigeScore">0</p>
+		<button id="GB" onclick="buyLvl(this.id)">Buy gachiBASS For </button>
+		<button id="GG" onclick="buyLvl(this.id)">Buy gachiGASM</button>
+		<button id="GP" onclick="buyLvl(this.id)">Buy gachiPls</button>
+		<button id="GH" onclick="buyLvl(this.id)">Buy gachiHYPER</button>
 		<script>
 			var canvas = document.getElementById("e");
 			var context = canvas.getContext("2d");
 			var billy = new Image();
+			
 			var gachis = 0;
-			var prestigeGachis = 0;
-			var clickLevel = 1;
+			
+			var GBB = {level:0, active:false, gain:this.level+(this.level/10), price:function(){60*((1+this.level)/10)}}; 
+			var GGB = {level:0, active:false, gain:this.level+(this.level/9), price:function(){120*((1+this.level)/10)}};
+			var GPB = {level:0, active:false, gain:this.level+(this.level/8), price:function(){240*((1+this.level)/10)}};
+			var GHB = {level:0, active:false, gain:this.level+(this.level/7), price:function(){480*((1+this.level)/10)}};
+			
 			billy.src = "https://discordemoji.com/assets/emoji/gachiBASS.png";
 			billy.onload = function() {
 				context.drawImage(billy, 0, 0);
 			};
-			function maxout() {
-				if (gachis == 100) {
-					clickLevel *= 2;
-					gachis = 0;
-				}
-				else if (gachis > 100) {
-					prestigeGachis += gachis - 100;
-					clickLevel *=2;
-					gachis = 0;
-				}
-			}
 			canvas.addEventListener("click", clicked, false);
 			function clicked(e) {
-				gachis += 1 * clickLevel;
-				maxout();
+				gachis += 1;
+			}
+			function buyLvl(id) {
+				switch(id) {
+					case "GB":
+						if(gachis >= GBB.price && GBB.level == 0 && GBB) {
+							GBB.level += 1;
+							GBB.active = true;
+						}else if (gachis >= GBB.price) {
+							GBB.level += 1;
+						}
+						break;
+					case "GG":
+						
+						break;
+					case "GP":
+						
+						break;
+					case "GH":
+						
+						break;
+					default:
+						break;
+				}	
 			}
 			setInterval(function(){
-				document.getElementById("score").innerHTML = "Your gachis are: " + gachis;
-				document.getElementById("prestigeScore").innerHTML = "Your prestige gachis are: " + prestigeGachis;
+				document.getElementById("score").innerHTML = "Your gachi value is: " + gachis;
 			}, 100);
 		</script>
 	</body>
