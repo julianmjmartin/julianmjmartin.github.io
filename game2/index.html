@@ -16,13 +16,16 @@
 			billy.onload = function() {
 				context.drawImage(billy, 0, 0);
 			};
-			if (gachis == 100) {
-				clickLevel *= 2;
-				gachis = 0;
+			function maxout() {
+				if (gachis == 100) {
+					clickLevel *= 2;
+					gachis = 0;
+				}
 			}
 			canvas.addEventListener("click", clicked, false);
 			function clicked(e) {
 				gachis += 1 * clickLevel;
+				maxout();
 			}
 			setInterval(function(){
 				document.getElementById("score").innerHTML = gachis;
