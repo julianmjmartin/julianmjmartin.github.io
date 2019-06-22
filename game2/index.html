@@ -17,10 +17,10 @@
 			
 			var gachis = 0;
 			
-			var GBB = {level:0, active:false, gain:this.level+((this.level+1)/20), price:function(){60*((1+this.level)/10)}}; 
-			var GGB = {level:0, active:false, gain:this.level+((this.level+1)/18), price:function(){120*((1+this.level)/10)}};
-			var GPB = {level:0, active:false, gain:this.level+((this.level+1)/16), price:function(){240*((1+this.level)/10)}};
-			var GHB = {level:0, active:false, gain:this.level+((this.level+1)/14), price:function(){480*((1+this.level)/10)}};
+			var GBB = {level:0, active:false, gain:function(){return this.level+((this.level+1)/20)}, price:function(){return 60*((1+this.level)/10)}}; 
+			var GGB = {level:0, active:false, gain:function(){return this.level+((this.level+1)/18)}, price:function(){return 120*((1+this.level)/10)}};
+			var GPB = {level:0, active:false, gain:function(){return this.level+((this.level+1)/16)}, price:function(){return 240*((1+this.level)/10)}};
+			var GHB = {level:0, active:false, gain:function(){return this.level+((this.level+1)/14)}, price:function(){return 480*((1+this.level)/10)}};
 			
 			billy.src = "https://discordemoji.com/assets/emoji/gachiBASS.png";
 			billy.onload = function() {
