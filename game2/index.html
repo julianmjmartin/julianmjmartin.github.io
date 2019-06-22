@@ -6,7 +6,7 @@
 	<body>
 		<canvas id="e" width="600" height="686"></canvas>
 		<p id="score">0</p>
-		<button id="GB" onclick="buyLvl(this.id)">Buy gachiBASS For </button>
+		<button id="GB" onclick="buyLvl(this.id)">Buy gachiBASS</button>
 		<button id="GG" onclick="buyLvl(this.id)">Buy gachiGASM</button>
 		<button id="GP" onclick="buyLvl(this.id)">Buy gachiPls</button>
 		<button id="GH" onclick="buyLvl(this.id)">Buy gachiHYPER</button>
@@ -17,10 +17,10 @@
 			
 			var gachis = 0;
 			
-			var GBB = {level:0, active:false, gain:this.level+(this.level/10), price:function(){60*((1+this.level)/10)}}; 
-			var GGB = {level:0, active:false, gain:this.level+(this.level/9), price:function(){120*((1+this.level)/10)}};
-			var GPB = {level:0, active:false, gain:this.level+(this.level/8), price:function(){240*((1+this.level)/10)}};
-			var GHB = {level:0, active:false, gain:this.level+(this.level/7), price:function(){480*((1+this.level)/10)}};
+			var GBB = {level:0, active:false, gain:this.level+((this.level+1)/20), price:function(){60*((1+this.level)/10)}}; 
+			var GGB = {level:0, active:false, gain:this.level+((this.level+1)/18), price:function(){120*((1+this.level)/10)}};
+			var GPB = {level:0, active:false, gain:this.level+((this.level+1)/16), price:function(){240*((1+this.level)/10)}};
+			var GHB = {level:0, active:false, gain:this.level+((this.level+1)/14), price:function(){480*((1+this.level)/10)}};
 			
 			billy.src = "https://discordemoji.com/assets/emoji/gachiBASS.png";
 			billy.onload = function() {
@@ -33,28 +33,78 @@
 			function buyLvl(id) {
 				switch(id) {
 					case "GB":
-						if(gachis >= GBB.price && GBB.level == 0 && GBB) {
+						if(gachis >= GBB.price && GBB.level == 0) {
 							GBB.level += 1;
 							GBB.active = true;
-						}else if (gachis >= GBB.price) {
+						}else if (gachis >= GBB.price && GBB.level < 10) {
 							GBB.level += 1;
 						}
 						break;
 					case "GG":
-						
+						if(gachis >= GGB.price && GGB.level == 0) {
+							GGB.level += 1;
+							GGB.active = true;
+						}else if (gachis >= GGB.price && GGB.level < 10) {
+							GGB.level += 1;
+						}
 						break;
 					case "GP":
-						
+						if(gachis >= GPB.price && GPB.level == 0) {
+							GPB.level += 1;
+							GPB.active = true;
+						}else if (gachis >= GPB.price && GPB.level < 10) {
+							GPB.level += 1;
+						}
 						break;
 					case "GH":
-						
+						if(gachis >= GHB.price && GHB.level == 0) {
+							GHB.level += 1;
+							GHB.active = true;
+						}else if (gachis >= GHB.price && GHB.level < 10) {
+							GHB.level += 1;
+						}
 						break;
 					default:
+						console.log("uh oh spagettios looks like my code broke again");
 						break;
 				}	
 			}
 			setInterval(function(){
+				if(GBB.active == true) {
+					gachis += GBB.gain; 
+				}
+				if(GGB.active == true) {
+					gachis += GGB.gain; 
+				}
+				if(GPB.active == true) {
+					gachis += GPB.gain; 
+				}
+				if(GHB.active == true) {
+					gachis += GHB.gain; 
+				}
+			}, 1000);
+			setInterval(function(){
 				document.getElementById("score").innerHTML = "Your gachi value is: " + gachis;
+				if(GBB.level < 10) {
+					document.getElementById("GB").innerHTML = "Buy gachiBASS level " + (GBB.level+1) + " for " + GBB.price + " gachis";				
+				}else {
+					document.getElementById("GB").innerHTML = "Your gachiBASS level is max";				
+				}
+				if(GGB.level < 10) {
+					document.getElementById("GG").innerHTML = "Buy gachiGASM level " + (GGB.level+1) + " for " + GGB.price + " gachis";				
+				}else {
+					document.getElementById("GG").innerHTML = "Your gachiGASM level is max";				
+				}
+				if(GPB.level < 10) {
+					document.getElementById("GP").innerHTML = "Buy gachiPls level " + (GPB.level+1) + " for " + GPB.price + " gachis";				
+				}else {
+					document.getElementById("GP").innerHTML = "Your gachiPls level is max";				
+				}
+				if(GHB.level < 10) {
+					document.getElementById("GH").innerHTML = "Buy gachiHYPER level " + (GHB.level+1) + " for " + GHB.price + " gachis";				
+				}else {
+					document.getElementById("GH").innerHTML = "Your gachiHYPER level is max";				
+				}
 			}, 100);
 		</script>
 	</body>
