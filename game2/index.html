@@ -7,20 +7,24 @@
       var gLevel = 0;
       function init() {
         while(gachis <= 1000) {
-          switch(gLevel) {
-            case 0:
-              gachis += 0.1;
-              break;
-            case 1:
-              gachis += 1;
-              break;
-            case 2:
-              gachis += 2;
-              break;
-          }
-          document.getElementById("gScore").innerHTML = gachis;
-        }  
+          setInterval(updateScore(), 1000);
+        }
       }  
+      function updateScore() {
+        switch(gLevel) {
+          case 0:
+            gachis += 0.1;
+            break;
+          case 1:
+            gachis += 1;
+            break;
+          case 2:
+            gachis += 2;
+            break;
+        }
+        gachis.toFixed(1);
+        document.getElementById("gScore").innerHTML = gachis;
+      }
       function levelOne() {
         if(gachis >= 10) {
           gLevel = 1;
