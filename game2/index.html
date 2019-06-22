@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      var gachis = 0, gLevel = 0;
+      function init() {
+        switch(gLevel) {
+          case 0:
+            gachis += 0.1;
+            break;
+          case 1:
+            gachis += 1;
+            break;
+          case 2:
+            gachis += 2;
+            break;
+        }
+        document.getElementById("gScore").innerHTML = gachis;
+      }
+      function levelOne() {
+        if(gachis >= 10) {
+          gLevel = 1;
+        }
+      }
+      function levelTwo() {
+        if(gachis >= 100) {
+          gLevel = 2;
+        }
+      }
+    </script>
+  </head>
+  <body onload="init()">
+    <p id="gScore">0</p>
+    <button onclick="levelOne()">Buy Level 1 (10g)</button>
+    <button onclick="levelTwo()">Buy Level 2 (100g)</button>
+  </body>
+</html>
