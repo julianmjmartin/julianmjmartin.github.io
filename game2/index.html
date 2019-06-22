@@ -5,6 +5,7 @@
 	</head>
 	<link rel="sylesheet" href="game.css">
 	<body>
+		<canvas id="e" width="600" height="686"></canvas>
 		<script>
 var canvas = document.getElementById("e");
 var context = canvas.getContext("2d");
@@ -119,7 +120,6 @@ setInterval(function gainGachis(){
 	}
 }, 1000);
 		</script>
-		<canvas id="e" width="600" height="686"></canvas>
 		<p>Your gachi value is:</p>
 		<p id="score">0</p>
 		<button id="GB" onclick="buyLvl(this.id)">Buy gachiBASS</button>
