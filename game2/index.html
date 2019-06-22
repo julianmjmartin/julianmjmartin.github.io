@@ -29,7 +29,8 @@
 			
 			var gachis = 0;
 			
-			var GBB = {level:0, active:false}; 
+			//var GBB = {level:0, active:false};
+			var gachiBASS = { level: 0, active: false, price: function() { return ((this.level + 1)* 60);} };
 			var GGB = {level:0, active:false};
 			var GPB = {level:0, active:false};
 			var GHB = {level:0, active:false};
@@ -45,7 +46,7 @@
 			function buyLvl(id) {
 				switch(id) {
 					case "GB":
-						if(gachis >= ((GBB.level + 1)* 60) && GBB.level == 0) {
+						if(gachis >= /*((GBB.level + 1)* 60)*/ gachiBASS.price && GBB.level == 0) {
 							GBB.level += 1;
 							GBB.active = true;
 							gachis -= ((GBB.level + 1)* 60 / 2);
@@ -111,7 +112,7 @@
             	var gachivs = gachis.toFixed(1);
 				document.getElementById("score").innerHTML = "Your gachi value is: " + gachivs;
 				if(GBB.level < 10) {
-					document.getElementById("GB").innerHTML = "Buy gachiBASS level " + (GBB.level+1) + " for " + ((GBB.level + 1) * 60) + " gachis";				
+					document.getElementById("GB").innerHTML = "Buy gachiBASS level " + (GBB.level+1) + " for " + gachiBASS.price + " gachis";				
 				}else {
 					document.getElementById("GB").innerHTML = "Your gachiBASS level is max";				
 				}
