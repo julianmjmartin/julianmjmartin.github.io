@@ -1,25 +1,153 @@
 <!DOCTYPE html>
-  <html>
-    <head>
-      <!-- CSS -->
-        <link rel="stylesheet" href="game.css">
-        <style> 
-          html, body {
-            width: 100%;
-            height: 100%;
-            margin: 0px;
-            border: 0;
-            overflow: hidden; 
-            display: block;  
-          }
-        </style>
-      <!-- JS -->
-        <script src="https://julianmjmartin.github.io/index.js"></script> 
-      <!-- Page Name -->
-        <title>
-          DPRK Game
-        </title>
-    </head>
-    <body onload="startGame()">
-    </body>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+html, body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	overflow: hidden; /*  Disable scrollbars */
+    display: block;
+}
+
+canvas {
+    border:1px solid #d3d3d3;
+    background-color: #f1f1f1;
+}
+</style>
+<script>
+
+var paddle;
+var ball;
+
+var moveX = -10;
+var moveY = 5;
+
+function startGame() {
+	paddle = new component(window.innerHeight / 50, window.innerHeight / 3 , "red", window.innerWidth / 100, window.innerHeight / 2 + window.innerHeight / 200 );
+	ball = new component(window.innerHeight / 100, window.innerHeight / 100, "green", window.innerWidth / 2 - window.innerHeight / 800, window.innerHeight / 2 - window.innerHeight / 800);
+	cpu = new component(window.innerHeight / 50, window.innerHeight / 3 , "red", window.innerWidth - window.innerWidth / 50, window.innerHeight / 2 + window.innerHeight / 200 );
+    game.start();
+}
+
+var game = {
+    canvas : document.createElement("canvas"),
+    start : function() {
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+        this.context = this.canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        this.frameNo = 0;
+        this.interval = setInterval(updateGameArea, 20);
+		window.addEventListener('keydown', function (e) {
+			game.key = e.keyCode;
+		})
+		window.addEventListener('keyup', function (e) {
+			game.key = false;
+		})
+    },
+    clear : function() {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+}
+
+function component(width, height, color, x, y, type) {
+    this.type = type;
+    this.score = 0;
+    this.width = width;
+    this.height = height; 
+    this.x = x;
+    this.y = y;
+    this.update = function() {
+        ctx = game.context;
+        if (this.type == "text") {
+            ctx.font = this.width + " " + this.height;
+            ctx.fillStyle = color;
+            ctx.fillText(this.text, this.x, this.y);
+        } else {
+            ctx.fillStyle = color;
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+        }
+    }
+    this.newPos = function() {
+        this.hitBottom();
+		this.hitTop();
+    }
+    this.hitBottom = function() {
+        var rockbottom = game.canvas.height - this.height;
+        if (this.y > rockbottom) {
+            this.y = rockbottom;
+        }
+    }
+	this.hitTop = function() {
+        var top = 0;
+        if (this.y < top) {
+			this.y = top;
+        }
+    }
+    this.crashWith = function(otherobj) {
+        var myleft = this.x;
+        var myright = this.x + (this.width);
+        var mytop = this.y;
+        var mybottom = this.y + (this.height);
+        var otherleft = otherobj.x;
+        var otherright = otherobj.x + (otherobj.width);
+        var othertop = otherobj.y;
+        var otherbottom = otherobj.y + (otherobj.height);
+        var bruh = true;
+        if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
+            bruh = false;
+        }
+        return bruh;
+    }
+}
+
+function updateGameArea() {
+    var x, height, gap, minHeight, maxHeight, minGap, maxGap;
+    if (paddle.crashWith(ball) || cpu.crashWith(ball)) {
+        moveX = -(moveX);
+    } 
+	if (ball.y <= 0 || ball.y >= game.canvas.height - ball.height) {
+		moveY = -(moveY);
+	}
+    game.clear();
+    game.frameNo += 1;
+	if (game.key && game.key == 38) {
+		paddle.y -= 6;
+		console.log("bruh");
+	}
+    if (game.key && game.key == 40) {
+		paddle.y += 6;
+		console.log("bruh");
+	}
+	if (cpu.y + cpu.height / 2 < ball.y + ball.height / 2) {
+		cpu.y += 15;
+		console.log("up");
+	}
+	if (cpu.y + cpu.height / 2 > ball.y + ball.height / 2) {
+		cpu.y -= 15;
+		console.log("down");
+	}
+    paddle.newPos();
+    paddle.update();
+	cpu.newPos();
+    cpu.update();
+	ball.newPos();
+	ball.x += moveX;
+	ball.y += moveY;
+    ball.update();
+	moveX += moveX / 1000;
+	moveY += moveY / 1000;
+	console.log(cpu.y);
+}
+
+function everyinterval(n) {
+    if ((game.frameNo / n) % 1 == 0) {return true;}
+    return false;
+}
+</script>
+</head>
+<body onload="startGame()">
+</body>
 </html>
