@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+html, body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	overflow: hidden; /*  Disable scrollbars */
+    display: block;
+	background-color: #1a1a1a;
+}
+
+canvas {
+    border: 10px solid #000000;
+    background-color: #1a1a1a;
+}
+
+.btns {
+	width: 25%;
+	height: 40%;
+	background-color: #f4511e;
+	border: none;
+	color: white;
+	text-align: center;
+	font-size: 16px;
+	opacity: 0.6;
+	transition: 0.3s;
+	text-decoration: none;
+	cursor: pointer;
+	position: fixed;	
+	top: 25%;
+}
+
+#easy {
+	left: 6.22%;
+}
+
+#medium {
+	left: 37.48%;
+}
+
+#hard {
+	right: 6.22%
+}
+
+#score {
+	font-size: 30px;
+	position: fixed;	
+	top: 5%;
+	left: 48%;
+	color: white;
+}
+</style>
+<script>
+
+var paddle;
+var ball;
+
+var moveX;
+var moveY = 0;
+
+var playerScore = 0;
+var cpuScore = 0;
+
+function startGame(id) {
+	cpu = new component(window.innerHeight / 40, window.innerHeight / 5 , "#00e64d", 30, window.innerHeight / 2 + window.innerHeight / 200 );
+	ball = new component(window.innerHeight / 100, window.innerHeight / 100, "#00e64d", window.innerWidth / 2 - window.innerHeight / 100, window.innerHeight / 2 - window.innerHeight / 100);
+	paddle = new component(window.innerHeight / 40, window.innerHeight / 5 , "#00e64d", window.innerWidth - (30 + (window.innerHeight / 50 * 2)), window.innerHeight / 2 + window.innerHeight / 200 );
+    game.start();
+	switch (id) {
+		case "easy":
+			moveX = -15;
+			console.log("ez");
+			break;
+		case "medium":
+			moveX = -20;
+			console.log("med");
+			break;
+		case "hard":
+			moveX = -30;
+			console.log("hard");
+			break;
+	}
+	var e = document.getElementById("easy");
+	var m = document.getElementById("medium");
+	var h = document.getElementById("hard");
+	e.style.display = "none";
+	m.style.display = "none";
+	h.style.display = "none";
+}
+
+var game = {
+    canvas : document.createElement("canvas"),
+    start : function() {
+        this.canvas.width = window.innerWidth - 20;
+        this.canvas.height = window.innerHeight - 20;
+		this.canvas.style.cursor = "none"; //hide mouse
+        this.context = this.canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        this.frameNo = 0;
+        this.interval = setInterval(updateGameArea, 20);
+		window.addEventListener('mousemove', function (e) {
+			game.y = e.pageY;
+		})
+    },
+    clear : function() {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+}
+
+function component(width, height, color, x, y, type) {
+    this.type = type;
+    this.score = 0;
+    this.width = width;
+    this.height = height; 
+    this.x = x;
+    this.y = y;
+    this.update = function() {
+        ctx = game.context;
+        if (this.type == "text") {
+            ctx.font = this.width + " " + this.height;
+            ctx.fillStyle = color;
+            ctx.fillText(this.text, this.x, this.y);
+        } else {
+            ctx.fillStyle = color;
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+        }
+    }
+    this.newPos = function() {
+        this.hitBottom();
+		this.hitTop();
+    }
+    this.hitBottom = function() {
+        var rockbottom = game.canvas.height - this.height;
+        if (this.y > rockbottom) {
+            this.y = rockbottom;
+        }
+    }
+	this.hitTop = function() {
+        var top = 0;
+        if (this.y < top) {
+			this.y = top;
+        }
+    }
+    this.crashWith = function(otherobj) {
+        var myleft = this.x;
+        var myright = this.x + (this.width);
+        var mytop = this.y;
+        var mybottom = this.y + (this.height);
+        var otherleft = otherobj.x;
+        var otherright = otherobj.x + (otherobj.width);
+        var othertop = otherobj.y;
+        var otherbottom = otherobj.y + (otherobj.height);
+        var bruh = true;
+        if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
+            bruh = false;
+        }
+        return bruh;
+    }
+}
+
+function updateGameArea() {
+    var x, height, gap, minHeight, maxHeight, minGap, maxGap;
+    if (paddle.crashWith(ball) || cpu.crashWith(ball)) {
+		if (ball.y + window.innerHeight / 200 >= paddle.y && ball.y + window.innerHeight / 200 <= paddle.y + paddle.height / 3) {
+			moveX = -(moveX);
+			moveY -= 2;
+		}
+		else if (ball.y + window.innerHeight / 200 > paddle.y + paddle.height / 3 && ball.y + window.innerHeight / 200 <= paddle.y + paddle.height / 1.5) {
+			moveX = -(moveX);
+			if (moveY < 0) {
+				moveY += 2;
+				console.log("down");
+			}
+			else {
+				moveY -= 2;
+				console.log("up");
+			}
+		}
+		else if (ball.y + window.innerHeight / 200 > paddle.y + paddle.height / 1.5 && ball.y + window.innerHeight / 200 <= paddle.y + paddle.height) {
+			moveX = -(moveX);
+			moveY += 2;
+		}
+		else if (ball.y + window.innerHeight / 200 >= cpu.y && ball.y + window.innerHeight / 200 <= cpu.y + cpu.height / 3) {
+			moveX = -(moveX);
+			moveY -= 2;
+		}
+		else if (ball.y + window.innerHeight / 200 > cpu.y + cpu.height / 3 && ball.y + window.innerHeight / 200 <= cpu.y + cpu.height / 1.5) {
+			moveX = -(moveX);
+			if (moveY < 0) {
+				moveY += 2;
+				console.log("down");
+			}
+			else {
+				moveY -= 2;
+				console.log("up");
+			}
+		}
+		else if (ball.y + window.innerHeight / 200 > cpu.y + cpu.height / 1.5 && ball.y + window.innerHeight / 200 <= cpu.y + cpu.height) {
+			moveX = -(moveX);
+			moveY += 2;
+		}
+		else {
+			moveX = -(moveX);
+		}
+		
+    } 
+	if (ball.y <= 0 || ball.y >= game.canvas.height - ball.height) {
+		moveY = -(moveY);
+	}
+	if (ball.x <= 0) {
+		playerScore += 1;
+		ball.x = window.innerWidth / 2 - window.innerHeight / 100;
+		ball.y = window.innerHeight / 2 - window.innerHeight / 100;
+		console.log("player");
+	}
+	if (ball.x >= window.innerWidth) {
+		cpuScore += 1;
+		ball.x = window.innerWidth / 2 - window.innerHeight / 100;
+		ball.y = window.innerHeight / 2 - window.innerHeight / 100;
+		console.log("player");
+	}
+    game.clear();
+    game.frameNo += 1;
+	if (ball.x <= window.innerWidth / 2 ) {
+		if (cpu.y + cpu.height / 2 < ball.y + ball.height / 2) {
+			cpu.y += 12;
+		}
+		if (cpu.y + cpu.height / 2 > ball.y + ball.height / 2) {
+			cpu.y -= 12;
+		}
+	}
+	else {
+		if (cpu.y + cpu.height / 2 < window.innerHeight / 2) {
+			cpu.y += 12;
+		}
+		if (cpu.y + cpu.height / 2 > window.innerHeight / 2) {
+			cpu.y -= 12;
+		}
+	}
+    paddle.newPos();
+    paddle.update();
+	cpu.newPos();
+    cpu.update();
+	ball.newPos();
+	ball.x += moveX;
+	ball.y += moveY;
+    ball.update();
+	console.log(moveY);
+	document.getElementById("score").innerHTML = cpuScore + " : " + playerScore;
+	if (game.y) {
+		paddle.y = game.y; 
+	}	
+}
+function mouseCoords(e) {
+	var y = e.clientY;
+	paddle.y = y - paddle.width / 2;
+}
+function everyinterval(n) {
+    if ((game.frameNo / n) % 1 == 0) {return true;}
+    return false;
+}
+</script>
+</head>
+<body>
+<button id="easy" class="btns" onclick="startGame(this.id)">Easy Mode</button>
+<button id="medium" class="btns" onclick="startGame(this.id)">Normal Mode</button>
+<button id="hard" class="btns" onclick="startGame(this.id)">Hard Mode</button>
+<p id="score"></p>
+</body>
+</html>
