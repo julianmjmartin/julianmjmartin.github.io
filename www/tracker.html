@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+    
+    <!-- Css -->
+	<link rel="stylesheet" type="text/css" href="css/index.css">	
+	<link rel="stylesheet" type="text/css" href="css/tracker.css">
+	<link rel="stylesheet" type="text/css" href="css/class.css">
+    
+    <!-- Js -->
+	<script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    
+</head>
+<body data-selector="track" onload="load()">
+    	<div id="divider">
+		<p id="title">Tasks</p>
+	    	<img id="darrb" src="img/darrb.png">
+	</div>
+	<div id="content">
+		
+		<p id="classsub">Enter class:</p> <select id="classsel"></select>
+		
+		<p id="duesub">Enter due date:</p> <input type="date" id="duesel">
+		<p id="typesub">Enter type:</p> <select id="typesel">
+			<option value="Test">Test</option>
+			<option value="Assignment">Assignment</option>
+			<option value="Homework">Homework</option>
+			<option value="Other">Other</option>
+		</select>
+		
+		<img id="add" src="img/addb.png" onclick="display()">
+	</div>
+	<div id="navbar">
+	    <a href="index.html">
+			<img class="himg" src="img/upcoming.png">
+		</a>
+		<a href="calendar.html">
+			<img class="himg" src="img/calendar.png">
+		</a>
+		<a href="classes.html">
+			<img class="himg" src="img/classes.png">
+		</a>
+		<a href="#">
+			<img class="himg" src="img/trackersel.png">
+		</a>
+	</div>
+
+</body>
+</html>

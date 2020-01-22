@@ -1,0 +1,104 @@
+.classtext {
+	font-family: 'Poppins';
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+}
+.topic {
+	color: #FFFFFF;
+}
+.avg {
+	color: #81D4FA;
+}
+.date {
+	color: #FFFFFF;
+}
+.remove {
+	font-family: 'Poppins';
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+	color: #CF6679;
+}
+
+#add {
+	position: fixed;
+	margin: 0;
+	padding: 0;
+	z-index: 999;
+}
+
+#class1 {
+	background-color: #404040;
+	position: fixed;
+}
+#class2 {
+	background-color: #404040;
+	position: fixed;
+}
+#class3 {
+	background-color: #404040;
+	position: fixed;
+}
+#class4 {
+	background-color: #404040;
+	position: fixed;
+}
+#class5 {
+	background-color: #404040;
+	position: fixed;
+}
+#class6 {
+	background-color: #404040;
+	position: fixed;
+}
+#class7 {
+	background-color: #404040;
+	position: fixed;
+}
+#class8 {
+	background-color: #404040;
+	position: fixed;
+}
+#class9 {
+	background-color: #404040;
+	position: fixed;
+}
+#class10 {
+	background-color: #404040;
+	position: fixed;
+}
+#class11 {
+	background-color: #404040;
+	position: fixed;
+}
+#class12 {
+	background-color: #404040;
+	position: fixed;
+}
+#class13 {
+	background-color: #404040;
+	position: fixed;
+}
+#class14 {
+	background-color: #404040;
+	position: fixed;
+}
+#class15 {
+	background-color: #404040;
+	position: fixed;
+}
+#class16 {
+	background-color: #404040;
+	position: fixed;
+}
+#class17 {
+	background-color: #404040;
+	position: fixed;
+}
+#class18 {
+	background-color: #404040;
+	position: fixed;
+}
